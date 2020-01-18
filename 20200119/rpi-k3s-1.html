@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.3.3.2.0 (Linux)"/>
+	<meta name="created" content="2020-01-18T23:50:01.267453474"/>
+	<meta name="changed" content="2020-01-19T00:25:51.333209939"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		pre { background: transparent }
+		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		pre.cjk { font-family: "Noto Sans Mono CJK SC", monospace; font-size: 10pt }
+		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
+		h1 { margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
+		h1.ctl { font-family: "Lohit Devanagari"; font-size: 18pt; font-weight: bold }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+		code.western { font-family: "Liberation Mono", monospace }
+		code.cjk { font-family: "Noto Sans Mono CJK SC", monospace }
+		code.ctl { font-family: "Liberation Mono", monospace }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p style="margin-bottom: 0in; line-height: 100%">
+K3S for raspberry-pi</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">	Current we have
+problem in deploying update a quiet a large number of raspberry-pi 3
+computer  module for data logger farm. We found k3s is quiet a simple
+mean in do that. Every time we prepare a new docker images using
+Docker-file and build. And prepare a custom Resource Descriptor. Once
+update on Master node, rest of the node will be automatic updated
+afterward.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Here is our install
+procedure is here</p>
+<p style="margin-bottom: 0in; line-height: 100%">https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">First install
+raspberry image to computer module, for most user the computer module
+must be install into a computer module adapter board and plugin user
+cable. The project we use our custom adapter board.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Most of the install
+procedure for compute module are in 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Run rpiboot</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Download Raspbian
+Lite version with GUI</p>
+<p style="margin-bottom: 0in; line-height: 100%"><a href="https://downloads.raspberrypi.org/raspbian_lite_latest">https://downloads.raspberrypi.org/raspbian_lite_latest</a></p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">After  flashing the
+image restart the module by unplug all USB-plugs.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Boot the newly
+installed module and login</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Login to root user</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">“sudo su - “</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Attach the module
+Ethernet port to a network that reachable to internet. 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Run command to
+update repository</p>
+<p style="margin-bottom: 0in; line-height: 100%">apt-get
+update&lt;enter&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%">Run command to
+upgrade packages</p>
+<p style="margin-bottom: 0in; line-height: 100%">apt-get
+dist-update&lt;enter&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Run command.</p>
+<p style="margin-bottom: 0in; line-height: 100%">reboot 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Login again with
+root access.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Here we start
+install k3s packages using script.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<pre class="western">curl -sfL https://get.k3s.io | sh -</pre><p style="margin-bottom: 0in; line-height: 100%">
+<br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">After script
+complete 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Check if k3s started</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Run Command.</p>
+<p style="margin-bottom: 0in; line-height: 100%">k3s kubectl get
+nodes --all-namespaces</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">K3S_TOKEN is created
+on 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><code class="western">/var/lib/rancher/k3s/server/node-token</code></p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">install worker node</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<pre class="western">curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=”XXX” sh -
+WHERE K3S_TOKEN is token string in node-token file, XXX is file content.</pre><p style="margin-bottom: 0in; line-height: 100%">
+<br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<h1 class="western">For more information 
+</h1>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><a href="https://github.com/rancher/k3s">https://github.com/rancher/k3s</a></p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><a href="https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md">https://www.raspberrypi.org/documentation/hardware/computemodule/cm-emmc-flashing.md</a></p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">https://kubernetes.io</p>
+</body>
+</html>
