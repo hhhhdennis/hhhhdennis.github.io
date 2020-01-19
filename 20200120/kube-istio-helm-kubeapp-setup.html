@@ -1,0 +1,1250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 6.3.3.2.0 (Linux)"/>
+	<meta name="created" content="2020-01-19T23:58:53.667876327"/>
+	<meta name="changed" content="2020-01-20T00:00:46.521088443"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
+		h1 { margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
+		h1.cjk { font-family: "Noto Sans CJK SC"; font-size: 18pt; font-weight: bold }
+		h1.ctl { font-family: "Lohit Devanagari"; font-size: 18pt; font-weight: bold }
+		h2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 16pt; font-weight: bold }
+		h2.cjk { font-family: "Noto Sans CJK SC"; font-size: 16pt; font-weight: bold }
+		h2.ctl { font-family: "Lohit Devanagari"; font-size: 16pt; font-weight: bold }
+		h3 { margin-top: 0.1in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h3.western { font-family: "Liberation Sans", sans-serif; font-size: 14pt; font-weight: bold }
+		h3.cjk { font-family: "Noto Sans CJK SC"; font-size: 14pt; font-weight: bold }
+		h3.ctl { font-family: "Lohit Devanagari"; font-size: 14pt; font-weight: bold }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><h1 class="western">
+host setup 
+</h1>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<h2 class="western">masterkube</h2>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<h2 class="western">worker1</h2>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<h2 class="western">worker2</h2>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<h3 class="western">worker3</h3>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<h1 class="western">install centos-7.6</h1>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">logon to each node
+with user root and password</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">disable swap by
+comment out swap mount</p>
+<p style="margin-bottom: 0in; line-height: 100%">vi /etc/fstab</p>
+<p style="margin-bottom: 0in; line-height: 100%">#/dev/mapper/centos-swap
+swap                    swap    defaults        0 0</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">perform update to OS
+on each system</p>
+<p style="margin-bottom: 0in; line-height: 100%">$yum update -y</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">uninstall 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$yum remote
+firewalld</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">uninstall 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$dnf remove abrt</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">install docker</p>
+<p style="margin-bottom: 0in; line-height: 100%">$yum install docker</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">setup centos network</p>
+<p style="margin-bottom: 0in; line-height: 100%">$cd
+/etc/sysconfig/network-script</p>
+<p style="margin-bottom: 0in; line-height: 100%">$touch ifcfg-eth0</p>
+<p style="margin-bottom: 0in; line-height: 100%">$touch ifcfg-eth1</p>
+<p style="margin-bottom: 0in; line-height: 100%">$vi ifcfg-eth0</p>
+<p style="margin-bottom: 0in; line-height: 100%">past following</p>
+<p style="margin-bottom: 0in; line-height: 100%">DEVICE=eth0</p>
+<p style="margin-bottom: 0in; line-height: 100%">IPADDR=192.168.100.11</p>
+<p style="margin-bottom: 0in; line-height: 100%">NETMASK=255.255.255.0</p>
+<p style="margin-bottom: 0in; line-height: 100%">NETWORK=192.168.100.0</p>
+<p style="margin-bottom: 0in; line-height: 100%">BROADCAST=192.168.100.255</p>
+<p style="margin-bottom: 0in; line-height: 100%">#GATEWAY=192.168.100.1</p>
+<p style="margin-bottom: 0in; line-height: 100%">#DNS1=1.1.1.1</p>
+<p style="margin-bottom: 0in; line-height: 100%">ONBOOT=yes</p>
+<p style="margin-bottom: 0in; line-height: 100%">NAME=eth0</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$vi ifcfg-eth1</p>
+<p style="margin-bottom: 0in; line-height: 100%">DEVICE=eth1</p>
+<p style="margin-bottom: 0in; line-height: 100%">IPADDR=192.168.1.11</p>
+<p style="margin-bottom: 0in; line-height: 100%">NETMASK=255.255.255.0</p>
+<p style="margin-bottom: 0in; line-height: 100%">NETWORK=192.168.1.0</p>
+<p style="margin-bottom: 0in; line-height: 100%">BROADCAST=192.168.1.255</p>
+<p style="margin-bottom: 0in; line-height: 100%">GATEWAY=192.168.1.1</p>
+<p style="margin-bottom: 0in; line-height: 100%">DNS1=1.1.1.1</p>
+<p style="margin-bottom: 0in; line-height: 100%">ONBOOT=yes</p>
+<p style="margin-bottom: 0in; line-height: 100%">NAME=eth1</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">setup hostname</p>
+<p style="margin-bottom: 0in; line-height: 100%">$vi /etc/hostname</p>
+<p style="margin-bottom: 0in; line-height: 100%">&lt;&lt;add your
+host name here&gt;&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%">masterkube</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">setup hosts 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$vi /etc/hosts</p>
+<p style="margin-bottom: 0in; line-height: 100%">&lt;&lt;add all ip
+address and hostname of your cluster&gt;&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%">127.0.0.1 localhost</p>
+<p style="margin-bottom: 0in; line-height: 100%">192.168.1.11
+masterkube</p>
+<p style="margin-bottom: 0in; line-height: 100%">192.168.1.12 worker1</p>
+<p style="margin-bottom: 0in; line-height: 100%">192.168.1.13 worker2</p>
+<p style="margin-bottom: 0in; line-height: 100%">192.168.1.14 worker3</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">add kubernetes to
+repo 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">run following
+scripts</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$cat &lt;&lt;EOF &gt;
+/etc/yum.repos.d/kubernetes.repo</p>
+<p style="margin-bottom: 0in; line-height: 100%">[kubernetes]</p>
+<p style="margin-bottom: 0in; line-height: 100%">name=Kubernetes</p>
+<p style="margin-bottom: 0in; line-height: 100%">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</p>
+<p style="margin-bottom: 0in; line-height: 100%">enabled=1</p>
+<p style="margin-bottom: 0in; line-height: 100%">gpgcheck=1</p>
+<p style="margin-bottom: 0in; line-height: 100%">repo_gpgcheck=1</p>
+<p style="margin-bottom: 0in; line-height: 100%">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</p>
+<p style="margin-bottom: 0in; line-height: 100%">exclude=kube*</p>
+<p style="margin-bottom: 0in; line-height: 100%">EOF</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Set SELinux in
+permissive mode (effectively disabling it)</p>
+<p style="margin-bottom: 0in; line-height: 100%">$setenforce 0</p>
+<p style="margin-bottom: 0in; line-height: 100%">$sed -i
+'s/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$yum install -y
+kubelet kubeadm kubectl --disableexcludes=kubernetes</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$systemctl enable
+kubelet &amp;&amp; systemctl start kubelet</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">set sysctl config 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$cat &lt;&lt;EOF &gt;
+ /etc/sysctl.d/k8s.conf</p>
+<p style="margin-bottom: 0in; line-height: 100%">net.bridge.bridge-nf-call-ip6tables
+= 1</p>
+<p style="margin-bottom: 0in; line-height: 100%">net.bridge.bridge-nf-call-iptables
+= 1</p>
+<p style="margin-bottom: 0in; line-height: 100%">EOF</p>
+<p style="margin-bottom: 0in; line-height: 100%">$sysctl --system</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">create a single node
+cluster</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubadm init
+--pod-network-cidr=192.168.0.0/16</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">wait the process to
+completed</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">task finished with 
+output like this 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">[init] Using
+Kubernetes version: vX.Y.Z</p>
+<p style="margin-bottom: 0in; line-height: 100%">[preflight] Running
+pre-flight checks</p>
+<p style="margin-bottom: 0in; line-height: 100%">[kubeadm] WARNING:
+starting in 1.8, tokens expire after 24 hours by default (if you
+require a non-expiring token use --token-ttl 0)</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+Generated ca certificate and key.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+Generated apiserver certificate and key.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+apiserver serving cert is signed for DNS names [kubeadm-master
+kubernetes kubernetes.default kubernetes.default.svc
+kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.138.0.4]</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+Generated apiserver-kubelet-client certificate and key.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+Generated sa key and public key.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+Generated front-proxy-ca certificate and key.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates]
+Generated front-proxy-client certificate and key.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[certificates] Valid
+certificates and keys now exist in &quot;/etc/kubernetes/pki&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[kubeconfig] Wrote
+KubeConfig file to disk: &quot;admin.conf&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[kubeconfig] Wrote
+KubeConfig file to disk: &quot;kubelet.conf&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[kubeconfig] Wrote
+KubeConfig file to disk: &quot;controller-manager.conf&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[kubeconfig] Wrote
+KubeConfig file to disk: &quot;scheduler.conf&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[controlplane] Wrote
+Static Pod manifest for component kube-apiserver to
+&quot;/etc/kubernetes/manifests/kube-apiserver.yaml&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[controlplane] Wrote
+Static Pod manifest for component kube-controller-manager to
+&quot;/etc/kubernetes/manifests/kube-controller-manager.yaml&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[controlplane] Wrote
+Static Pod manifest for component kube-scheduler to
+&quot;/etc/kubernetes/manifests/kube-scheduler.yaml&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[etcd] Wrote Static
+Pod manifest for a local etcd instance to
+&quot;/etc/kubernetes/manifests/etcd.yaml&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[init] Waiting for
+the kubelet to boot up the control plane as Static Pods from
+directory &quot;/etc/kubernetes/manifests&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[init] This often
+takes around a minute; or longer if the control plane images have to
+be pulled.</p>
+<p style="margin-bottom: 0in; line-height: 100%">[apiclient] All
+control plane components are healthy after 39.511972 seconds</p>
+<p style="margin-bottom: 0in; line-height: 100%">[uploadconfig]
+Storing the configuration used in ConfigMap &quot;kubeadm-config&quot;
+in the &quot;kube-system&quot; Namespace</p>
+<p style="margin-bottom: 0in; line-height: 100%">[markmaster] Will
+mark node master as master by adding a label and a taint</p>
+<p style="margin-bottom: 0in; line-height: 100%">[markmaster] Master
+master tainted and labelled with key/value:
+node-role.kubernetes.io/master=&quot;&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[bootstraptoken]
+Using token: &lt;token&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%">[bootstraptoken]
+Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in
+order for nodes to get long term certificate credentials</p>
+<p style="margin-bottom: 0in; line-height: 100%">[bootstraptoken]
+Configured RBAC rules to allow the csrapprover controller
+automatically approve CSRs from a Node Bootstrap Token</p>
+<p style="margin-bottom: 0in; line-height: 100%">[bootstraptoken]
+Creating the &quot;cluster-info&quot; ConfigMap in the &quot;kube-public&quot;
+namespace</p>
+<p style="margin-bottom: 0in; line-height: 100%">[addons] Applied
+essential addon: CoreDNS</p>
+<p style="margin-bottom: 0in; line-height: 100%">[addons] Applied
+essential addon: kube-proxy</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">To start using your
+cluster, you need to run the following as a regular user:</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  mkdir -p
+$HOME/.kube</p>
+<p style="margin-bottom: 0in; line-height: 100%">  sudo cp -i
+/etc/kubernetes/admin.conf $HOME/.kube/config</p>
+<p style="margin-bottom: 0in; line-height: 100%">  sudo chown $(id
+-u):$(id -g) $HOME/.kube/config</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">You should now
+deploy a pod network to the cluster.</p>
+<p style="margin-bottom: 0in; line-height: 100%">Run &quot;kubectl
+apply -f [podnetwork].yaml&quot; with one of the options listed at:</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+https://kubernetes.io/docs/concepts/cluster-administration/addons/</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">You can now join any
+number of machines by running the following on each node</p>
+<p style="margin-bottom: 0in; line-height: 100%">as root:</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  kubeadm join
+192.168.1.70:6443 --token
+x...........................................</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  copy kubernetes
+config and credentials</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $mkdir -p
+$HOME/.kube</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $cp -i
+/etc/kubernetes/admin.conf $HOME/.kube/config</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $chown $(id
+-u):$(id -g) $HOME/.kube/config</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  progagate to other
+node using scp</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  scp -r .kube
+root@192.168.1.12:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  enter password</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  scp -r .kube
+root@192.168.1.12:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  enter password</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  scp -r .kube
+root@192.168.1.12:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  enter password</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  scp -r .kube
+root@192.168.1.12:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  enter password</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  now join other
+node to cluster</p>
+<p style="margin-bottom: 0in; line-height: 100%">  login to each node
+one by one with username root and password</p>
+<p style="margin-bottom: 0in; line-height: 100%">  execute each node 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">    $kubeadm join
+--token &lt;token&gt; &lt;master-ip&gt;:&lt;master-port&gt;
+--discovery-token-ca-cert-hash sha256:&lt;hash&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> wait until the
+process finished.</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> if you do not have
+the token or lost 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> execute</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> $kubeadm token
+listkubeadm token list</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> default join token
+will expire after 24 hours 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> to recreate a token
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> $kubeadm token
+create</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> If you don’t have
+the value of --discovery-token-ca-cert-hash, you can get it by
+running the following command chain on the master node:</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">openssl x509 -pubkey
+-in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der
+2&gt;/dev/null | \</p>
+<p style="margin-bottom: 0in; line-height: 100%">   openssl dgst
+-sha256 -hex | sed 's/^.* //'</p>
+<p style="margin-bottom: 0in; line-height: 100%">   
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">   
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> go back to
+masterkube node</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl get pods
+--all-namespaces</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+coredns-576cbf47c7-dw7jb                                      1/1    
+&lt;&lt;pending&gt;&gt;     0          107m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+coredns-576cbf47c7-xq6mx                                      1/1    
+&lt;&lt;pending&gt;&gt;     0          107m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+etcd-kubemaster                                               1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-apiserver-kubemaster                                     1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-controller-manager-kubemaster                            1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-proxy-8gqhw                                              1/1    
+Running     0          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-proxy-pjt9q                                              1/1    
+Running     0          107m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-proxy-s2lvg                                              1/1    
+Running     0          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-scheduler-kubemaster                                     1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+tiller-deploy-6f6fd74b68-52968                                1/1    
+Running     0          102m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+weave-net-8xq5h                                               2/2    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+weave-net-bx7qm                                               2/2    
+Running     1          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+weave-net-k76xr 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> the coresdns not
+running due to no network running on Kubernetes.</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> Now install the
+kubernetes cluster network.</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> execute 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> $kubectl apply -f
+&quot;https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version
+| base64 | tr -d '\n')&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> Wait until process
+finished.</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> check the pods</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> $kubectl get pods
+--all-namespaces</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+coredns-576cbf47c7-dw7jb                                      1/1    
+Running     0          107m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+coredns-576cbf47c7-xq6mx                                      1/1    
+Running     0          107m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+etcd-kubemaster                                               1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-apiserver-kubemaster                                     1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-controller-manager-kubemaster                            1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-proxy-8gqhw                                              1/1    
+Running     0          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-proxy-pjt9q                                              1/1    
+Running     0          107m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-proxy-s2lvg                                              1/1    
+Running     0          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+kube-scheduler-kubemaster                                     1/1    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+tiller-deploy-6f6fd74b68-52968                                1/1    
+Running     0          102m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+weave-net-8xq5h                                               2/2    
+Running     0          106m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+weave-net-bx7qm                                               2/2    
+Running     1          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-system   
+weave-net-k76xr                                               2/2    
+Running     1          104m</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Check STATUS Column
+if all pods is in Running state, other there may be a problem in
+installation or firewall rules.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">default master node
+is isolated from workers node.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Execute following
+allow master to do worker job.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl taint nodes
+--all node-role.kubernetes.io/master-kubectl taint nodes --all
+node-role.kubernetes.io/master-</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Check your node.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl get nodes</p>
+<p style="margin-bottom: 0in; line-height: 100%">NAME         STATUS 
+ ROLES    AGE    VERSION</p>
+<p style="margin-bottom: 0in; line-height: 100%">masterkube   Ready  
+ master   112m   v1.12.2</p>
+<p style="margin-bottom: 0in; line-height: 100%">worker1      Ready  
+ &lt;none&gt;   108m   v1.12.2</p>
+<p style="margin-bottom: 0in; line-height: 100%">worker2      Ready  
+ &lt;none&gt;   108m   v1.12.2</p>
+<p style="margin-bottom: 0in; line-height: 100%">worker3      Ready  
+ &lt;none&gt;   108m   v1.12.2</p>
+<p style="margin-bottom: 0in; line-height: 100%">worker4      Ready  
+ &lt;none&gt;   108m   v1.12.2</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Indicate all node is
+ready.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">note:</p>
+<p style="margin-bottom: 0in; line-height: 100%">to remove a node</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl drain &lt;node
+name&gt; --delete-local-data --force --ignore-daemonsets</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl delete node
+&lt;node name&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">to remove all
+kubeadm installed state</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubeadm reset</p>
+<p style="margin-bottom: 0in; line-height: 100%">----------------------------------------------------</p>
+<p style="margin-bottom: 0in; line-height: 100%">Adding dashboard to
+Kubernetes</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl apply -f
+https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">create a sample user
+for dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$cat &lt;&lt;EOF&gt;
+serviceaccount.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%">apiVersion: v1</p>
+<p style="margin-bottom: 0in; line-height: 100%">kind: ServiceAccount</p>
+<p style="margin-bottom: 0in; line-height: 100%">metadata:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name: admin-user</p>
+<p style="margin-bottom: 0in; line-height: 100%">  namespace:
+kube-system</p>
+<p style="margin-bottom: 0in; line-height: 100%">EOF</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">then execute</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl apply -f
+serviceaccount.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$cat &lt;&lt;EOF&gt;
+clusterrolebinding.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%">apiVersion:
+rbac.authorization.k8s.io/v1beta1</p>
+<p style="margin-bottom: 0in; line-height: 100%">kind:
+ClusterRoleBinding</p>
+<p style="margin-bottom: 0in; line-height: 100%">metadata:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name: admin-user</p>
+<p style="margin-bottom: 0in; line-height: 100%">roleRef:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  apiGroup:
+rbac.authorization.k8s.io</p>
+<p style="margin-bottom: 0in; line-height: 100%">  kind: ClusterRole</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name:
+cluster-admin</p>
+<p style="margin-bottom: 0in; line-height: 100%">subjects:</p>
+<p style="margin-bottom: 0in; line-height: 100%">- kind:
+ServiceAccount</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name: admin-user</p>
+<p style="margin-bottom: 0in; line-height: 100%">  namespace:
+kube-system</p>
+<p style="margin-bottom: 0in; line-height: 100%">EOF</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  then execute</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $kubectl apply -f
+clusterrolebinding.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  get bearer token
+execute following</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $kubectl -n
+kube-system describe secret $(kubectl -n kube-system get secret |
+grep admin-user | awk '{print $1}')</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  show display
+following, check the kubernetes-dashboard pod if it is in Running
+state.</p>
+<p style="margin-bottom: 0in; line-height: 100%">  NAME              
+                     READY   STATUS    RESTARTS   AGE</p>
+<p style="margin-bottom: 0in; line-height: 100%">coredns-576cbf47c7-dw7jb
+               1/1     Running   0          124m</p>
+<p style="margin-bottom: 0in; line-height: 100%">coredns-576cbf47c7-xq6mx
+               1/1     Running   0          124m</p>
+<p style="margin-bottom: 0in; line-height: 100%">etcd-kubemaster     
+                   1/1     Running   0          123m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-apiserver-kubemaster
+              1/1     Running   0          123m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-controller-manager-kubemaster
+     1/1     Running   0          123m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-proxy-8gqhw    
+                   1/1     Running   0          120m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-proxy-pjt9q    
+                   1/1     Running   0          124m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-proxy-s2lvg    
+                   1/1     Running   0          120m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-scheduler-kubemaster
+              1/1     Running   0          123m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kubernetes-dashboard-77fd78f978-mbqzm
+  1/1     Running   0          72s</p>
+<p style="margin-bottom: 0in; line-height: 100%">tiller-deploy-6f6fd74b68-52968
+         1/1     Running   0          118m</p>
+<p style="margin-bottom: 0in; line-height: 100%">weave-net-8xq5h     
+                   2/2     Running   0          122m</p>
+<p style="margin-bottom: 0in; line-height: 100%">weave-net-bx7qm     
+                   2/2     Running   1          120m</p>
+<p style="margin-bottom: 0in; line-height: 100%">weave-net-k76xr     
+                   2/2     Running   1          120m</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $kubectl get svc
+-n kube-system</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  NAME              
+    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE</p>
+<p style="margin-bottom: 0in; line-height: 100%">kube-dns            
+  ClusterIP   10.96.0.10       &lt;none&gt;        53/UDP,53/TCP  
+125m</p>
+<p style="margin-bottom: 0in; line-height: 100%">kubernetes-dashboard
+  ClusterIP   10.102.222.174   &lt;none&gt;        443/TCP        
+2m21s</p>
+<p style="margin-bottom: 0in; line-height: 100%">tiller-deploy       
+  ClusterIP   10.110.24.38     &lt;none&gt;        44134/TCP      
+120m</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">check if EXTERNAL-IP
+is none, that is the kubernetes is default configure to clusterIP
+mode</p>
+<p style="margin-bottom: 0in; line-height: 100%">change it NodePort
+allow external workstation to access</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl edit svc -n
+kube-system kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">The command output
+should be a editor with something like this.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">apiVersion: v1</p>
+<p style="margin-bottom: 0in; line-height: 100%">kind: Service</p>
+<p style="margin-bottom: 0in; line-height: 100%">metadata:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  annotations:</p>
+<p style="margin-bottom: 0in; line-height: 100%">   
+kubectl.kubernetes.io/last-applied-configuration: |</p>
+<p style="margin-bottom: 0in; line-height: 100%">     
+{&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{},&quot;labels&quot;:{&quot;k8s-app&quot;:&quot;kubernetes-dashboard&quot;},&quot;name&quot;:&quot;kubernetes-dashboard&quot;,&quot;namespace&quot;:&quot;kube-system&quot;},&quot;spec&quot;:{&quot;ports&quot;:[{&quot;port&quot;:443,&quot;targetPort&quot;:8443}],&quot;selector&quot;:{&quot;k8s-app&quot;:&quot;kubernetes-dashboard&quot;}}}</p>
+<p style="margin-bottom: 0in; line-height: 100%">  creationTimestamp:
+2018-11-13T12:28:02Z</p>
+<p style="margin-bottom: 0in; line-height: 100%">  labels:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    k8s-app:
+kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name:
+kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">  namespace:
+kube-system</p>
+<p style="margin-bottom: 0in; line-height: 100%">  resourceVersion:
+&quot;15110&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">  selfLink:
+/api/v1/namespaces/kube-system/services/kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">  uid:
+90215bac-e73f-11e8-b4ec-000a0b000021</p>
+<p style="margin-bottom: 0in; line-height: 100%">spec:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  clusterIP:
+10.102.222.174</p>
+<p style="margin-bottom: 0in; line-height: 100%">  ports:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  - port: 443</p>
+<p style="margin-bottom: 0in; line-height: 100%">    protocol: TCP</p>
+<p style="margin-bottom: 0in; line-height: 100%">    targetPort: 8443</p>
+<p style="margin-bottom: 0in; line-height: 100%">  selector:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    k8s-app:
+kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">  sessionAffinity:
+None</p>
+<p style="margin-bottom: 0in; line-height: 100%">  type: ClusterIP</p>
+<p style="margin-bottom: 0in; line-height: 100%">status:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  loadBalancer: {}</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  --</p>
+<p style="margin-bottom: 0in; line-height: 100%">  check the type:
+ClusterIP --&gt;  change it to type: NodePort</p>
+<p style="margin-bottom: 0in; line-height: 100%">  press esc -&gt;
+:wq to save</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  Execute 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $kubectl describe
+svc -n kube-system kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">  the command
+output.</p>
+<p style="margin-bottom: 0in; line-height: 100%">  Name:             
+       kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">Namespace:          
+     kube-system</p>
+<p style="margin-bottom: 0in; line-height: 100%">Labels:             
+     k8s-app=kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">Annotations:        
+     kubectl.kubernetes.io/last-applied-configuration:</p>
+<p style="margin-bottom: 0in; line-height: 100%">                    
+      
+{&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{},&quot;labels&quot;:{&quot;k8s-app&quot;:&quot;kubernetes-dashboard&quot;},&quot;name&quot;:&quot;kubernetes-dashboard&quot;...</p>
+<p style="margin-bottom: 0in; line-height: 100%">Selector:           
+     k8s-app=kubernetes-dashboard</p>
+<p style="margin-bottom: 0in; line-height: 100%">Type:               
+     NodePort</p>
+<p style="margin-bottom: 0in; line-height: 100%">IP:                 
+     10.102.222.174</p>
+<p style="margin-bottom: 0in; line-height: 100%">Port:               
+     &lt;unset&gt;  443/TCP</p>
+<p style="margin-bottom: 0in; line-height: 100%">TargetPort:         
+     8443/TCP</p>
+<p style="margin-bottom: 0in; line-height: 100%">NodePort:           
+     &lt;unset&gt;  31976/TCP</p>
+<p style="margin-bottom: 0in; line-height: 100%">Endpoints:          
+     10.32.0.11:8443</p>
+<p style="margin-bottom: 0in; line-height: 100%">Session Affinity:   
+     None</p>
+<p style="margin-bottom: 0in; line-height: 100%">External Traffic
+Policy:  Cluster</p>
+<p style="margin-bottom: 0in; line-height: 100%">Events:             
+     &lt;none&gt;</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  check the
+NodePort: &lt;unset&gt;  31976</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  using a browser 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  type url 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+https://192.168.1.11:31976</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  display will show
+a sign-in screen.</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  select Token</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  past the user
+token we obtain 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">or using this
+command to get token</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  $kubectl -n
+kube-system describe secret $(kubectl -n kube-system get secret |
+grep admin-user | awk '{print $1}')</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Browser should goto
+overview menu</p>
+<p style="margin-bottom: 0in; line-height: 100%">https://192.168.1.11:31976/#!/overview?namespace=default</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">------------------------------------------------</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">install Helm charts
+package manager.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">download</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$wget
+https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz</p>
+<p style="margin-bottom: 0in; line-height: 100%">uncompressing using
+tar utility</p>
+<p style="margin-bottom: 0in; line-height: 100%">$tar -xvf
+helm-v2.11.0-linux-amd64.tar.gz</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">change folder name
+to helm</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">add path to .bashrc</p>
+<p style="margin-bottom: 0in; line-height: 100%">export
+PATH=$HELM:$PATH:</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">test 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">start helm</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm init 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm repo list</p>
+<p style="margin-bottom: 0in; line-height: 100%">NAME    URL         
+                                   
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">stable 
+https://kubernetes-charts.storage.googleapis.com</p>
+<p style="margin-bottom: 0in; line-height: 100%">local  
+http://127.0.0.1:8879/charts      
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">add bitnami
+repository to helm 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm repo add
+https://charts.bitnami.com/bitnami 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">check again</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm repo list 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">NAME    URL         
+                                   
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">stable 
+https://kubernetes-charts.storage.googleapis.com</p>
+<p style="margin-bottom: 0in; line-height: 100%">local  
+http://127.0.0.1:8879/charts                    
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">bitnami
+https://charts.bitnami.com/bitnami</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">------------------------------------------------</p>
+<p style="margin-bottom: 0in; line-height: 100%">Now create istio
+system via helm template</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">install istio first.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">download istio from
+github</p>
+<p style="margin-bottom: 0in; line-height: 100%">curl -L
+https://git.io/getLatestIstio | sh -</p>
+<p style="margin-bottom: 0in; line-height: 100%">cd istio-1.0.3</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm template
+install/kubernetes/helm/istio --name istio --set grafana.enabled=true
+--set gateways.istio-ingressgateway.type=NodePort --set
+gateways.istio-egressgateway.type=NodePort --namespace istio-system &gt;
+$HOME/istio.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl create
+namespace istio-system</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl apply -f
+$HOME/istio.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">Istio Side car auto
+insertion</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">check automatic
+insertion of sidecar</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl
+api-versions | grep admissionregistration</p>
+<p style="margin-bottom: 0in; line-height: 100%">admissionregistration.k8s.io/v1beta1</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+-------------------------------------------------</p>
+<p style="margin-bottom: 0in; line-height: 100%">install KubeApps
+service</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">install via helm.</p>
+<p style="margin-bottom: 0in; line-height: 100%">dd repository to
+helm.</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm repo add
+bitnami https://charts.bitnami.com/bitnami</p>
+<p style="margin-bottom: 0in; line-height: 100%">install it.</p>
+<p style="margin-bottom: 0in; line-height: 100%">$helm install --name
+kubeapps --namespace kubeapps bitnami/kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">check kubeapps pods
+if up.</p>
+<p style="margin-bottom: 0in; line-height: 100%">export
+POD_NAME=$(kubectl get pods -n kubeapps -l
+&quot;app=kubeapps,release=kubeapps&quot; -o
+jsonpath=&quot;{.items[0].metadata.name}&quot;)</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">create service
+ServiceAccount and cluster role binding.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl create
+serviceaccount kubeapps-operator</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl create
+clusterrolebinding kubeapps-operator --clusterrole=cluster-admin
+--serviceaccount=default:kubeapps-operator</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">get secret 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl get secret
+$(kubectl get serviceaccount kubeapps-operator -o
+jsonpath='{.secrets[].name}') -o jsonpath='{.data.token}' | base64
+--decode</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">output is a editor.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">jsonpath='{.data.token}'
+| base64 --decode</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">allow external
+workstation access, do following.</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl get svc -n
+kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl edit svc
+kubeapps -n kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">apiVersion: v1</p>
+<p style="margin-bottom: 0in; line-height: 100%">kind: Service</p>
+<p style="margin-bottom: 0in; line-height: 100%">metadata:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  creationTimestamp:
+2018-11-13T10:41:49Z</p>
+<p style="margin-bottom: 0in; line-height: 100%">  labels:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    app: kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">    chart:
+kubeapps-0.9.6</p>
+<p style="margin-bottom: 0in; line-height: 100%">    heritage: Tiller</p>
+<p style="margin-bottom: 0in; line-height: 100%">    release:
+kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name: kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">  namespace:
+kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">  resourceVersion:
+&quot;41147&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">  selfLink:
+/api/v1/namespaces/kubeapps/services/kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">  uid:
+b9b39fad-e730-11e8-b4ec-000a0b000021</p>
+<p style="margin-bottom: 0in; line-height: 100%">spec:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  clusterIP:
+10.107.169.32</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+externalTrafficPolicy: Cluster</p>
+<p style="margin-bottom: 0in; line-height: 100%">  ports:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  - name: http</p>
+<p style="margin-bottom: 0in; line-height: 100%">    nodePort: 32200</p>
+<p style="margin-bottom: 0in; line-height: 100%">    port: 80</p>
+<p style="margin-bottom: 0in; line-height: 100%">    protocol: TCP</p>
+<p style="margin-bottom: 0in; line-height: 100%">    targetPort: http</p>
+<p style="margin-bottom: 0in; line-height: 100%">  selector:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    app: kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">    release:
+kubeapps</p>
+<p style="margin-bottom: 0in; line-height: 100%">  sessionAffinity:
+None</p>
+<p style="margin-bottom: 0in; line-height: 100%">  type: ClusterIP</p>
+<p style="margin-bottom: 0in; line-height: 100%">status:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  loadBalancer: {}</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  check &quot;type:
+ClusterIP&quot; -&gt; change it to NodePort</p>
+<p style="margin-bottom: 0in; line-height: 100%">  also change
+nodePort: 32200 or port you prefer 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  press esc -&gt;
+:wq! to save 
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  start a browser
+and type http://192.168.1.11:32200</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  Kubeapps dashboard
+will show on screen.</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%"> 
+---------------------------</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  deploy mysql using
+helm</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$echo
+&lt;&lt;EOF&gt;mysql-pv.yaml</p>
+<p style="margin-bottom: 0in; line-height: 100%">kind:
+PersistentVolume</p>
+<p style="margin-bottom: 0in; line-height: 100%">apiVersion: v1</p>
+<p style="margin-bottom: 0in; line-height: 100%">metadata:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name: redis-data</p>
+<p style="margin-bottom: 0in; line-height: 100%">  labels:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    type: local</p>
+<p style="margin-bottom: 0in; line-height: 100%">spec:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  storageClassName:
+generic</p>
+<p style="margin-bottom: 0in; line-height: 100%">  capacity:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    storage: 1Gi</p>
+<p style="margin-bottom: 0in; line-height: 100%">  accessModes:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    - ReadWriteOnce</p>
+<p style="margin-bottom: 0in; line-height: 100%">  hostPath:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    path:
+&quot;/bitnami/redis&quot;</p>
+<p style="margin-bottom: 0in; line-height: 100%">    
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl create -f
+pv-create.yml</p>
+<p style="margin-bottom: 0in; line-height: 100%">    
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$echo
+&lt;&lt;EOF&gt;mysql-pvc.yaml    
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">kind:
+PersistentVolumeClaim</p>
+<p style="margin-bottom: 0in; line-height: 100%">apiVersion: v1</p>
+<p style="margin-bottom: 0in; line-height: 100%">metadata:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  name: redis-data</p>
+<p style="margin-bottom: 0in; line-height: 100%">spec:</p>
+<p style="margin-bottom: 0in; line-height: 100%">  storageClassName:
+generic</p>
+<p style="margin-bottom: 0in; line-height: 100%">  accessModes:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    - ReadWriteOnce</p>
+<p style="margin-bottom: 0in; line-height: 100%">  resources:</p>
+<p style="margin-bottom: 0in; line-height: 100%">    requests:</p>
+<p style="margin-bottom: 0in; line-height: 100%">      storage: 8Gi  
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">EOF</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl create -f
+pv-claim.yml</p>
+<p style="margin-bottom: 0in; line-height: 100%">$kubectl get pvc</p>
+<p style="margin-bottom: 0in; line-height: 100%"><br/>
+
+</p>
+</body>
+</html>
